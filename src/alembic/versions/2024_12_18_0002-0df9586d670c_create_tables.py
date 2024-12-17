@@ -1,8 +1,8 @@
 """create tables
 
-Revision ID: 38020be6611d
+Revision ID: 0df9586d670c
 Revises: 
-Create Date: 2024-12-14 23:54:52.957782
+Create Date: 2024-12-18 00:02:20.500326
 
 """
 
@@ -13,7 +13,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = "38020be6611d"
+revision: str = "0df9586d670c"
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -52,7 +52,7 @@ def upgrade() -> None:
             server_default=sa.text("CURRENT_DATE"),
             nullable=False,
         ),
-        sa.Column("return_date", sa.Date(), nullable=False),
+        sa.Column("return_date", sa.Date(), nullable=True),
         sa.ForeignKeyConstraint(
             ["book_id"], ["books.id"], name=op.f("fk_borrows_book_id_books")
         ),
