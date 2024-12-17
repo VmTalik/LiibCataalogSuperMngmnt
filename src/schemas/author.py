@@ -1,13 +1,14 @@
 from typing import List
-from pydantic import BaseModel, Field, ConfigDict
+
+from pydantic import BaseModel, Field
 from datetime import date
-from schemas.book import BookReadForAuthor
+from .book import BookCreateResponse
 
 
 class AuthorBase(BaseModel):
     name: str = Field(..., min_length=1, max_length=120, description="Имя")
     surname: str = Field(..., min_length=1, max_length=120, description="Фамилия")
-    birth_date: date = Field(..., description="Дата рождения")
+    date_birth: date = Field(..., description="Дата рождения")
 
 
 class AuthorCreate(AuthorBase):
@@ -15,18 +16,15 @@ class AuthorCreate(AuthorBase):
 
 
 class AuthorCreateResponse(AuthorBase):
-    model_config = ConfigDict(
-        from_attributes=True
-    )
     id: int
 
 
-class AuthorReadResponse(AuthorBase):
-    model_config = ConfigDict(
-        from_attributes=True
-    )
-    id: int
-    books: List[BookReadForAuthor]
+class AuthorReadResponse(AuthorCreateResponse):
+    pass
+
+
+class AuthorReadByIdResponse(AuthorCreateResponse):
+    books: List[BookCreateResponse]
 
 
 class AuthorUpdate(AuthorBase):
