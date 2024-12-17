@@ -1,14 +1,14 @@
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, PositiveInt
 
 
 class BookBase(BaseModel):
     name: str = Field(..., min_length=1, max_length=120, description="Название")
     description: str = Field(..., min_length=2, max_length=120, description="Описание")
-    quantity: int = Field(..., ge=1, description="Количество доступных экземпляров")
+    quantity: PositiveInt = Field(..., ge=1, description="Количество доступных экземпляров")
 
 
 class BookCreate(BookBase):
-    author_id: int
+    author_id: PositiveInt
 
 
 class BookCreateResponse(BookBase):
