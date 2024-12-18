@@ -1,0 +1,6 @@
+FAILED_CREATE_AUTHOR = "Не удалось создать автора"
+FAILED_GET_AUTHOR = "Не удалось получить автора"
+FAILED_GET_AUTHORS = "Не удалось получить авторов "
+FAILED_UPDATE_AUTHOR = "Не удалось обновить автора"
+FAILED_DELETE_AUTHOR = "Не удалось удалить автора"
+FAILED_NUMBER_OF_AUTHORS = "Неправильное полученное количество авторов, должно быть "
