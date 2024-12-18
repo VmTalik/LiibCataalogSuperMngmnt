@@ -1,10 +1,10 @@
-from pydantic import BaseModel, ConfigDict, Field, PositiveInt
+from pydantic import BaseModel, Field, PositiveInt
 
 
 class BookBase(BaseModel):
     name: str = Field(..., min_length=1, max_length=120, description="Название")
     description: str = Field(..., min_length=2, max_length=120, description="Описание")
-    quantity: PositiveInt = Field(..., ge=1, description="Количество доступных экземпляров")
+    quantity: int = Field(..., ge=0, description="Количество доступных экземпляров")
 
 
 class BookCreate(BookBase):
@@ -12,29 +12,17 @@ class BookCreate(BookBase):
 
 
 class BookCreateResponse(BookBase):
-    model_config = ConfigDict(
-        from_attributes=True
-    )
     id: int
+    author_id: PositiveInt
 
 
-class BookReadResponse(BookBase):
-    model_config = ConfigDict(
-        from_attributes=True
-    )
-    id: int
-    author_id: int
+class BookReadResponse(BookCreateResponse):
+    pass
 
 
-class BookUpdate(BookBase):
+class BookUpdate(BookCreate):
     pass
 
 
 class BookUpdateResponse(BookCreateResponse):
-    pass
-
-
-class BookReadForAuthor(BookBase):
-    model_config = ConfigDict(
-        from_attributes=True
-    )
+    author_id: int
