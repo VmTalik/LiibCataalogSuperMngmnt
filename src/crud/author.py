@@ -15,7 +15,7 @@ class AuthorCRUDRepository(BaseCRUDRepository):
         return author
 
     async def get_authors_list(self, offset: int = 0, limit: int = 10):
-        stmt = select(Author).options(selectinload(Author.books)).offset(offset).limit(limit)
+        stmt = select(Author).offset(offset).limit(limit)
         result: Result = await self.async_session.execute(stmt)
         authors_list = result.scalars().all()
         return authors_list
